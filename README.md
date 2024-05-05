@@ -23,7 +23,7 @@ Thus, $i \geq \frac{\log(n)}{\log(13)}$
 Therefore $i = \log_{13} n$. Each recursive step adds a constant overhead of 5, so the total cost will be:
 
 $T(n) = 5i$ where $i = \log_{13} n$
-Hence, $T(n) = 5 \log_{13} n \approx \Theta(\log n)$
+Therefore, $T(n) = 5 \log_{13} n \approx \Theta(\log n)$
 
 2.  $$
     T(n) =

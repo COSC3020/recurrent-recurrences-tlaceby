@@ -1,4 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/8KYthzwp)
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/8iYthzwp)
 
 # Recurrent Recurrences
 
@@ -33,6 +33,16 @@ Therefore, $T(n) = 5 \log_{13} n \approx \Theta(\log n)$
         \end{cases}
     $$
 
+We apply similar logic for the recursion depth $i = \log_{13} n$. However each step scales the prior result by 13 and adds 5.
+
+$T(n) = 13T\left(\frac{n}{13}\right) + 5$
+
+Substituting iteratively, we get $T(n) = 13^i + 5 \cdot (1 + 13 + 13^2 + \dots + 13^{i-1})$.
+
+This sum is a geometric series, which simplifies to $5 \frac{13^i - 1}{12}$.
+
+Since $13^i$ grows with n, $13^i \approx n$, $T(n) \approx \Theta(n)$.
+
 3.  $$
     T(n) =
         \begin{cases}
@@ -40,3 +50,26 @@ Therefore, $T(n) = 5 \log_{13} n \approx \Theta(\log n)$
             13 T\left(\frac{n}{13}\right) + 2n & n > 1
         \end{cases}
     $$
+
+In this recurrence, each step includes a term linearly dependent on $n$, which will dominate the cost as the recursion unfolds.
+
+$T(n) = 13T\left(\frac{n}{13}\right) + 2n$.
+
+$T\left(\frac{n}{13}\right) = 13T\left(\frac{n}{13^2}\right) + 2 \frac{n}{13}$.
+
+$T(n) = 13^2 T\left(\frac{n}{13^2}\right) + 13 \cdot 2 \frac{n}{13} + 2n$.
+
+$T(n) = 13^2 T\left(\frac{n}{13^2}\right) + 2n \cdot (1 + 13)$.
+
+$T(n) = 13^k + 2n (1 + 13 + 13^2 + \dots + 13^{k-1})$.
+This simplifies to $2n \frac{13^k - 1}{12}$.
+
+As $13^k \approx n$, the dominating term turns out to be $2n \cdot \frac{n - 1}{12} \approx 2n \cdot \frac{n}{12} = \frac{n^2}{6}$
+
+Thus $T(n) = \Theta(n^2)$ due to the presence of $2n$ scaling with each recursive expansion.
+
+## External Resources
+
+- https://www.geeksforgeeks.org/substitution-method-to-solve-recurrence-relations/
+- My Discrete Textbook from a year ago: **Discrete Mathematics : An open Introduction (Oscar Levin) 3rd Edition** Pages 167 - 177 and some notes on solving recurrence relations and sequences.
+- Also used GPT with help with formatting and cleaning up my explaination.
